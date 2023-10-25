@@ -1,16 +1,15 @@
-package web.service;
+package PP231.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.dao.UserDao;
-import web.model.User;
+import PP231.dao.UserDao;
+import PP231.model.User;
 
 import java.util.List;
 
 @Service
-@Component
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -29,8 +28,8 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
     @Transactional
+    @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }

@@ -1,8 +1,7 @@
-package web.dao;
+package PP231.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import web.model.User;
+import PP231.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,17 +11,12 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
-    @Autowired
     private EntityManager entityManager;
-
 
     @Override
     public void addUser(User user) {
-        if (user.getId()!=0) {
-            entityManager.persist(user);
-        } else {
-            entityManager.merge(user);
-        }
+        entityManager.merge(user);
+
     }
 
     @Override
@@ -33,12 +27,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        return entityManager.createQuery("select user from User user ").getResultList();
+        return entityManager.createQuery("select user from User user", User.class).getResultList();
     }
 
     @Override
     public User getUserById(Long id) {
         return entityManager.find(User.class, id);
     }
-
 }

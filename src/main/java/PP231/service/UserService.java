@@ -1,6 +1,6 @@
-package web.service;
+package PP231.service;
 
-import web.model.User;
+import PP231.model.User;
 
 import java.util.List;
 

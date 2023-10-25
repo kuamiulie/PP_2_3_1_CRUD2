@@ -1,4 +1,4 @@
-package web.model;
+package PP231.model;
 
 import javax.persistence.*;
 

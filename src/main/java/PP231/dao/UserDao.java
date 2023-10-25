@@ -1,6 +1,6 @@
-package web.dao;
+package PP231.dao;
 
-import web.model.User;
+import PP231.model.User;
 
 import java.util.List;
 
