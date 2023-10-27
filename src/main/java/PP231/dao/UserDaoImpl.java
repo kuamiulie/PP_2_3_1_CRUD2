@@ -15,13 +15,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        entityManager.merge(user);
-
+        if (user.getId() < 0) {
+            entityManager.persist(user);
+        } else {
+            entityManager.merge(user);
+        }
     }
 
     @Override
-    public void deleteUser(Long id) {
-        User user = entityManager.find(User.class, id);
+    public void deleteUser(int id) {
+        User user = getUserById(id);
         entityManager.remove(user);
     }
 
@@ -31,7 +34,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(Long id) {
-        return entityManager.find(User.class, id);
+    public User getUserById(int id) {
+        User user = new User();
+        try {
+            user = entityManager.find(User.class, id);
+        } catch (NullPointerException e) {
+            System.out.println("THERE IS NO SUCH USER WITH THIS ID = " + id);
+        }
+        return user;
     }
+
 }

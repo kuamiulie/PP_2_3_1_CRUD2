@@ -1,6 +1,13 @@
 package PP231.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 
 @Entity
 @Table(name = "users")
@@ -8,12 +15,14 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @Column
+    @NotEmpty(message = "name cannot be empty")
+    @Pattern(regexp = "[a-zA-Z]+", message = "Name can consist of only letters")
     private String name;
 
-    @Column
+    @NotEmpty(message = "Name of your country cannot be empty")
+    @Pattern(regexp = "[a-zA-Z]+", message = "Country name can consist of only letters")
     private String countryOfBirth;
 
     public User() {
@@ -24,11 +33,11 @@ public class User {
         this.countryOfBirth = countryOfBirth;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

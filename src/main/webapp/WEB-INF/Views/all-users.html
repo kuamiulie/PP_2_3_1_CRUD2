@@ -22,7 +22,7 @@
         <td th:text="${user.countryOfBirth}"/>
 
         <td>
-            <form th:method="DELETE" th:action="@{/users/delete_user/(id=${user.getId()})}">
+            <form th:method="UPDATE" th:action="@{/users/delete_user/(id=${user.getId()})}">
             <input type = "submit"  value="Delete"/>
             </form>
         </td>
