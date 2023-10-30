@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import PP231.model.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        if (user.getId() < 0) {
+        if (user.getId() == 0) {
             entityManager.persist(user);
         } else {
             entityManager.merge(user);
@@ -35,13 +36,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserById(int id) {
-        User user = new User();
-        try {
-            user = entityManager.find(User.class, id);
-        } catch (NullPointerException e) {
+        User user = entityManager.find(User.class, id);
+        if (user == null) {
             System.out.println("THERE IS NO SUCH USER WITH THIS ID = " + id);
+            throw new EntityNotFoundException();
         }
         return user;
     }
-
 }
